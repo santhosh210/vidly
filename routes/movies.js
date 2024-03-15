@@ -27,7 +27,6 @@ router.post("/", auth, async (req, res) => {
   }
 
   const genre = await Genre.findById(req.body.genreId);
-  console.log(genre._id, req.body.genreId);
   if (!genre) {
     return res.status(400).send({ message: "Invalid genre" });
   }
@@ -41,7 +40,6 @@ router.post("/", auth, async (req, res) => {
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate,
   });
-  console.log(movie);
   movie = await movie.save();
   res.status(201).send({ message: "added successfully", movie });
 });
