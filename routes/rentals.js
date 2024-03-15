@@ -6,10 +6,6 @@ const Rental = require("../models/rental");
 const Movie = require("../models/movie");
 const Customer = require("../models/customer");
 const auth = require("../middleware/auth");
-
-// const Fawn = require("fawn");
-// Fawn.init("mongodb://localhost:27017/vidly");
-
 router.get("/", async (req, res) => {
   const rentals = await Rental.find().sort("-dateOut");
   res.status(200).send(rentals);
@@ -43,14 +39,6 @@ router.post("/", auth, async (req, res) => {
       dailyRentalRate: movie.dailyRentalRate,
     },
   });
-  //   try {
-  //     new Fawn.Task()
-  //       .save("rentals", rental)
-  //       .update("movies", { _id: movie._id }, { $inc: { numberInStock: -1 } })
-  //       .run();
-  //   } catch (error) {
-  //     res.status(500).send("Something failed");
-  //   }
 
   rental = await rental.save();
   movie.numberInStock--;
