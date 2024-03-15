@@ -1,7 +1,7 @@
 const User = require("../../../models/user");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-describe("user.geenrateAuthToken", () => {
+describe("user.genrateAuthToken", () => {
   it("Should return a valid JWT", () => {
     const payload = {
       _id: new mongoose.Types.ObjectId().toHexString(),
