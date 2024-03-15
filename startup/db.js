@@ -18,9 +18,12 @@ const mongoose = require("mongoose");
 
 module.exports = function () {
   mongoose
-    .connect("mongodb://localhost:27017/vidly", {
-      connectTimeoutMS: 30000,
-    })
+    .connect(
+      "mongodb+srv://kondasanthosh210:12345@vidly.cffparb.mongodb.net/?retryWrites=true&w=majority/vidly",
+      {
+        connectTimeoutMS: 30000,
+      }
+    )
     .then(() => console.log("Connected to database"))
     .catch((error) => console.error("Error connecting to database:", error));
 };
