@@ -8,7 +8,7 @@ module.exports = function () {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         connectTimeoutMS: 30000,
-        keepAlive: true, // Keep the connection alive
+        // keepAlive: true,
       }
     )
     .then(() => console.log("Connected to database"))
