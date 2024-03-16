@@ -5,6 +5,8 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 // const loadash = require("loadash");
 const bcrypt = require("bcrypt");
+const asyncHandler = require("../middleware/async");
+
 router.get(
   "/",
   asyncHandler(async (req, res) => {
