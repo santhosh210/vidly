@@ -3,6 +3,7 @@ const router = express.Router();
 const validateCustomer = require("../validations/customerValidation");
 const Customer = require("../models/customer");
 const auth = require("../middleware/auth");
+const asyncHandler = require("../middleware/async");
 
 router.get(
   "/",

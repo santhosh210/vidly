@@ -6,6 +6,7 @@ const Rental = require("../models/rental");
 const Movie = require("../models/movie");
 const Customer = require("../models/customer");
 const auth = require("../middleware/auth");
+const asyncHandler = require("../middleware/async");
 router.get(
   "/",
   asyncHandler(async (req, res) => {

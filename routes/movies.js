@@ -4,6 +4,7 @@ const validateMovie = require("../validations/movieValidation");
 const Movie = require("../models/movie");
 const Genre = require("../models/genre");
 const auth = require("../middleware/auth");
+const asyncHandler = require("../middleware/async");
 
 router.get(
   "/",

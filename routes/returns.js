@@ -3,6 +3,7 @@ const router = express.Router();
 const Rental = require("../models/rental");
 const validateReturn = require("../validations/returnValidation");
 const validate = require("../middleware/validate");
+const asyncHandler = require("../middleware/async");
 
 router.get(
   "/",

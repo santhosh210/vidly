@@ -3,6 +3,7 @@ const router = express.Router();
 const validateAuth = require("../validations/authValidation");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const asyncHandler = require("../middleware/async");
 
 router.post(
   "/",
