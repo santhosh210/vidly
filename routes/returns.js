@@ -4,11 +4,13 @@ const Rental = require("../models/rental");
 const validateReturn = require("../validations/returnValidation");
 const validate = require("../middleware/validate");
 const asyncHandler = require("../middleware/async");
+const dbFuntions = require("../helpers/dbFunctions");
 
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const returns = await Return.find().sort("name");
+    // const returns = await Return.find().sort("name");
+    const returns = await dbFuntions.findAll("Rental");
     res.status(200).send(returns);
   })
 );

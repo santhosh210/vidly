@@ -7,10 +7,12 @@ const Movie = require("../models/movie");
 const Customer = require("../models/customer");
 const auth = require("../middleware/auth");
 const asyncHandler = require("../middleware/async");
+const dbFuntions = require("../helpers/dbFunctions");
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const rentals = await Rental.find().sort("-dateOut");
+    // const rentals = await Rental.find().sort("-dateOut");
+    const rentals = await dbFuntions.findAll("Rental");
     res.status(200).send(rentals);
   })
 );
@@ -24,12 +26,13 @@ router.post(
       return res.status(400).send({ message: error.details[0].message });
     }
 
-    const customer = await Customer.findById(req.body.customerId);
+    // const customer = await Customer.findById(req.body.customerId);
+    const customer = await dbFuntions.findById("Customer", req.body.customerId);
     if (!customer) {
       return res.status(400).send({ message: "Invalid customer" });
     }
+    const movie = await dbFuntions.findById("Movie", req.body.movieId);
 
-    const movie = await Movie.findById(req.body.movieId);
     if (!movie) {
       return res.status(400).send({ message: "Invalid movie" });
     }

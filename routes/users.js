@@ -6,11 +6,13 @@ const jwt = require("jsonwebtoken");
 // const loadash = require("loadash");
 const bcrypt = require("bcrypt");
 const asyncHandler = require("../middleware/async");
+const dbFuntions = require("../helpers/dbFunctions");
 
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const users = await User.find().sort("name");
+    // const users = await User.find().sort("name");
+    const users = await dbFuntions.findAll("User");
     res.status(200).send(users);
   })
 );
@@ -23,7 +25,8 @@ router.post(
       return res.status(400).send({ message: error.details[0].message });
     }
 
-    let user = await User.findOne({ email: req.body.email });
+    // let user = await User.findOne({ email: req.body.email });
+    const user = await dbFuntions.findOne("User", { email: req.body.email });
     if (user) {
       return res.status(400).send({ message: "user already registered." });
     }

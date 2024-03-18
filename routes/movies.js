@@ -5,11 +5,13 @@ const Movie = require("../models/movie");
 const Genre = require("../models/genre");
 const auth = require("../middleware/auth");
 const asyncHandler = require("../middleware/async");
+const dbFuntions = require("../helpers/dbFunctions");
 
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    const movies = await Movie.find().sort("title");
+    // const movies = await Movie.find().sort("title");
+    const movies = await dbFuntions.findAll("Movie");
     res.status(200).send(movies);
   })
 );
@@ -17,7 +19,8 @@ router.get(
 router.get(
   "/:id",
   asyncHandler(async (req, res) => {
-    const movie = await Movie.findById(req.params.id);
+    // const movie = await Movie.findById(req.params.id);
+    const movie = await dbFuntions.findById("Movie", req.params.id);
     if (!movie) {
       res.status(404).send({
         message: "The movie with the ID was not found, try with different ID",
@@ -36,12 +39,13 @@ router.post(
       return res.status(400).send({ message: error.details[0].message });
     }
 
-    const genre = await Genre.findById(req.body.genreId);
+    // const genre = await Genre.findById(req.body.genreId);
+    const genre = await dbFuntions.findById("Genre", req.body.genreId);
     if (!genre) {
       return res.status(400).send({ message: "Invalid genre" });
     }
 
-    let movie = new Movie({
+    let movie = await dbFuntions.createOne("Movie", {
       title: req.body.title,
       genre: {
         _id: genre._id,
@@ -50,7 +54,7 @@ router.post(
       numberInStock: req.body.numberInStock,
       dailyRentalRate: req.body.dailyRentalRate,
     });
-    movie = await movie.save();
+
     res.status(201).send({ message: "added successfully", movie });
   })
 );
@@ -63,20 +67,10 @@ router.put(
     if (error) {
       return res.status(400).send({ message: error.details[0].message });
     }
-    const movie = await Movie.findByIdAndUpdate(
+    const movie = await dbFuntions.findByIdAndUpdate(
+      "Movie",
       req.params.id,
-      {
-        title: req.body.title,
-        genre: {
-          _id: genre._id,
-          name: genre.name,
-        },
-        numberInStock: req.body.numberInStock,
-        dailyRentalRate: req.body.dailyRentalRate,
-      },
-      {
-        new: true,
-      }
+      req.body
     );
 
     if (!movie) {

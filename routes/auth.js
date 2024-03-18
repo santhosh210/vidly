@@ -4,6 +4,7 @@ const validateAuth = require("../validations/authValidation");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const asyncHandler = require("../middleware/async");
+const dbFuntions = require("../helpers/dbFunctions");
 
 router.post(
   "/",
@@ -13,7 +14,8 @@ router.post(
       return res.status(400).send({ message: error.details[0].message });
     }
 
-    let user = await User.findOne({ email: req.body.email });
+    // let user = await User.findOne({ });
+    let user = await dbFuntions.findOne("User", { email: req.body.email });
     if (!user) {
       return res.send({ message: "Invalid email or password." });
     }

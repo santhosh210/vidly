@@ -5,8 +5,8 @@ module.exports = function () {
     .connect(
       "mongodb+srv://kondasanthosh210:12345@vidly.cffparb.mongodb.net/vidly",
       {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
         connectTimeoutMS: 30000,
         // keepAlive: true,
       }
