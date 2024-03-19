@@ -1,7 +1,8 @@
 const Redis = require("redis");
 const sendAlerts = require("../helpers/telegramBot");
 const client = Redis.createClient({
-  host: "localhost",
+  // host: "localhost",
+  host: "red-c6na6rjru51t7lilgs3g",
   port: 6379,
 });
 
