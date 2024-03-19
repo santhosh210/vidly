@@ -14,7 +14,8 @@ function sendMessage(chatId, message) {
   axios
     .post(apiUrl)
     .then((response) => {
-      console.log("Message sent successfully:", response.data);
+      // console.log("Message sent successfully:", response.data);
+      response.data;
     })
     .catch((error) => {
       console.error("Error sending message:", error);

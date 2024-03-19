@@ -4,6 +4,7 @@ const { addToQueue, processQueue } = require("./processQueue");
 const events = new QueueEvents("processQueue", { connection: client });
 
 const deadQueue = new Queue("deadQueue", { connection: client });
+
 const results = [];
 
 function add(a, b) {
@@ -15,9 +16,10 @@ async function processJob(job) {
   if (typeof data[0] === "number" && typeof data[1] === "number") {
     const result = add(data[0], data[1]);
     results.push(result);
-    console.log(result);
+    console.log(data, "processed result ==>", result);
   } else {
-    await deadQueue.add("deadJob", data);
+    console.log(data, "pushed to dead queue");
+    await deadQueue.add("deadJob ==> ", data);
   }
 }
 

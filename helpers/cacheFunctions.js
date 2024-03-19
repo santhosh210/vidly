@@ -32,7 +32,7 @@ const getValue = async (key) => {
     console.log(`Value retrieved for key ${key}:`, value);
     return value;
   } catch (error) {
-    console.error(`Error getting value for key ${key}:`, error);
+    // console.error(`Error getting value for key ${key}:`, error);
     throw error;
   }
 };

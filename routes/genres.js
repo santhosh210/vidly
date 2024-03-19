@@ -1,4 +1,5 @@
 const express = require("express");
+const sendAlerts = require("../helpers/telegramBot");
 const router = express.Router();
 const validateGenre = require("../validations/genreValidation");
 const auth = require("../middleware/auth");
@@ -14,7 +15,8 @@ router.get(
       const genres = await dbFunctions.findAll("Genre");
       res.status(200).send(genres);
     } catch (error) {
-      console.log();
+      sendAlerts(error);
+      console.log(error);
     }
   })
 );
@@ -46,6 +48,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const genre = await dbFunctions.findById("Genre", req.params.id);
     if (!genre) {
+      sendAlerts("The genre with the ID was not found, try with different ID");
       res.status(404).send({
         message: "The genre with the ID was not found, try with different ID",
       });
