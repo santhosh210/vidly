@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const sendAlerts = require("../helpers/telegramBot");
 
 module.exports = function () {
   mongoose
@@ -12,5 +13,6 @@ module.exports = function () {
       }
     )
     .then(() => console.log("Connected to database"))
+    .then(() => sendAlerts("Connected to database"))
     .catch((error) => console.error("Error connecting to database:", error));
 };

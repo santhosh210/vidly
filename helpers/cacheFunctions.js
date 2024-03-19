@@ -1,4 +1,5 @@
 const Redis = require("redis");
+const sendAlerts = require("../helpers/telegramBot");
 const client = Redis.createClient({
   host: "localhost",
   port: 6379,
@@ -8,6 +9,7 @@ const client = Redis.createClient({
 
 client.on("connect", () => {
   console.log("Connected to Redis");
+  sendAlerts("connected to Redis");
 });
 
 client.on("error", function (error) {
