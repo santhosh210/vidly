@@ -3,7 +3,7 @@ const token = "6812596204:AAHfJ9dgEqVejGeUJ45bKcrUAE0NOPdZFCI";
 
 const users = {
   santhosh: "1236834354",
-  satish: "1321350229",
+  // satish: "1321350229",
 };
 
 function sendMessage(chatId, message) {
